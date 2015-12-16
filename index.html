@@ -22,6 +22,8 @@
     <link rel="stylesheet" type="text/css" href="http://w2ui.com/src/w2ui-1.4.2.min.css" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
     <script type="text/javascript" src="http://w2ui.com/src/w2ui-1.4.2.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://dimplejs.org/dist/dimple.v2.1.6.min.js"></script>
 </head>
 <body>
     <div id="titre">CRUD Personnes</div>
@@ -156,5 +158,18 @@ $(function () {
 }
 
 </script>
+
+<script type="text/javascript">
+    var svg = dimple.newSvg("body", 800, 600);
+    var data = [
+      { "Word":"Hello", "Awesomeness":2000 },
+      { "Word":"World", "Awesomeness":3000 }
+    ];
+    var chart = new dimple.chart(svg, data);
+    chart.addCategoryAxis("x", "Word");
+    chart.addMeasureAxis("y", "Awesomeness");
+    chart.addSeries(null, dimple.plot.bar);
+    chart.draw();
+  </script>
 <body>
 </html>
