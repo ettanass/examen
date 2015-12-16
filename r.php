@@ -3,7 +3,7 @@ include_once 'connect.php';
 
 switch ($_GET["table"]) {
 	case "personne":
-		selectAllScores();
+		selectPersonne();
 		break;
 	case "colis":
 		selectColis($_GET);
@@ -12,7 +12,7 @@ switch ($_GET["table"]) {
 		;
 	break;
 }
-function selectAllScores(){
+function selectPersonne(){
 	global $conn;
 	$list= array();
 	$sql = "SELECT *, id_perso recid FROM personne ";

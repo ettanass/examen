@@ -2,14 +2,11 @@
 include_once 'connect.php';
 
 switch ($_GET["table"]) {
-	case "score":
-		createScore($_GET);
-		break;
 	case "personne":
 		createPersonne($_GET);
 		break;
-	case "document":
-		createDocument($_GET);
+	case "score":
+		createColis($_GET);
 		break;
 				
 	default:
@@ -17,41 +14,54 @@ switch ($_GET["table"]) {
 	break;
 }
 
-function createScore($data){
+
+
+function createPersonne($data){ 	
 	global $conn;
+
+
+
+	$sql = "SELECT * FROM personne where id_perso=".$data["id_perso"];
+	$result = $conn->query($sql);
+
+	if ($result->num_rows==0) {
+		$sql = "INSERT INTO personne ( nom , prenom )
+		VALUES ( '".$data["nom"]."' , '".$data["prenom"]."' )";
+					//echo $sql."<br>".$result->num_rows."<br>";
+					//echo $sql;
+		if ($conn->query($sql) === TRUE) {
+			return mysqli_insert_id($conn);
+
+			echo "New record created successfully";
+		} else {
+			echo "Error: " . $sql . "<br>" . $conn->error;
+		}
+	}
 	
-	$sql = "INSERT INTO scores (id_doc, id_perso, distance, maj)
-	VALUES (".$data["id_doc"].", ".$data["id_perso"].", ".$data["distance"].",NOW())";
-	//echo $sql;
-	if ($conn->query($sql) === TRUE) {
-	//    echo "New record created successfully";
-	} else {
-	 //   echo "Error: " . $sql . "<br>" . $conn->error;
-	}	
 }
 
-function createPersonne($data){
-	global $conn;
-	
-	$sql = "INSERT INTO personnes (nom) VALUES (".$data["nom"].")";
-	//echo $sql;
-	if ($conn->query($sql) === TRUE) {
-	    echo "New record of type personnes created successfully";
-	} else {
-	    echo "Error: " . $sql . "<br>" . $conn->error;
-	}	
-}
 
-function createDocument($data){
+
+
+function createColis($data){
 	global $conn;
 	
-	$sql = "INSERT INTO documents (nom, latlng, url) VALUES (".$data["nom"].", ".$data["latlng"].", ".$data["url"].")";
-	//echo $sql;
-	if ($conn->query($sql) === TRUE) {
-	    echo "New record of type documents created successfully";
-	} else {
-	    echo "Error: " . $sql . "<br>" . $conn->error;
-	}	
+	$sql = "SELECT * FROM personne where id_perso=".$data["id_perso"];
+	$result = $conn->query($sql);
+
+	if ($result->num_rows==0) {
+		$sql = "INSERT INTO colis ( nom_colis , id_perso )
+		VALUES ( ".$data["nom_colis"]." , ".$data["id_perso"]." )";
+					//echo $sql."<br>".$result->num_rows."<br>";
+					//echo $sql;
+		if ($conn->query($sql) === TRUE) {
+			return mysqli_insert_id($conn);
+
+			//echo "New record created successfully";
+		} else {
+			echo "Error: " . $sql . "<br>" . $conn->error;
+		}
+	}
 }
 
 

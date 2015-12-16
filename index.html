@@ -66,11 +66,11 @@ $(function () {
             footer: true,
         },
         columns: [                
-            { field: 'recid', caption: 'id', size: '150px', sortable: true, resizable: true },
-            { field: 'nom', caption: 'Nom', size: '150px', sortable: true, resizable: true, 
+            { field: 'recid', caption: 'id', size: '20%', sortable: true, resizable: true },
+            { field: 'nom', caption: 'Nom', size: '40%', sortable: true, resizable: true, 
                 editable: { type: 'text' }
             },
-            { field: 'prenom', caption: 'prenom', size: '150px', sortable: true, resizable: true, 
+            { field: 'prenom', caption: 'prenom', size: '40%', sortable: true, resizable: true, 
                 editable: { type: 'text' }
             },
            
@@ -97,20 +97,20 @@ $(function () {
 </script>
 
 
-<div id="titre">CRUD Documents</div>
+<div id="titre">CRUD Colis</div>
 <div id="grid3" style="width: 80%; height: 250px;margin-left: 10%;margin-right: 10%"></div>
 <br>
 <script defer type="text/javascript">
-var tabdocuments = [];
+var tabcolis = [];
 readallDocuments();
-
+    //j'ai pas pu terminer, j'ai mis mis l'id 1 a la place de la valeur retournée par l'input
 function readallDocuments(){
   data = {"table":"colis","id_perso":1};
   $.ajax({url :'r.php',
         data: data ,
         success : function (html){
           doc = JSON.parse(html);
-        remplirdocuments(doc);
+        remplircolis(doc);
     }
         });
     
@@ -118,10 +118,10 @@ function readallDocuments(){
 
 }
 
-function remplirdocuments(documents){
+function remplircolis(documents){
 
 documents.forEach(function(s){
-        tabdocuments.push({ recid: s["id_colis"], nom_colis: s["nom_colis"],id_perso: s["id_colis"], check: false});
+        tabcolis.push({ recid: s["id_colis"], nom_colis: s["nom_colis"],id_perso: s["id_colis"], check: false});
     });
 
 $(function () {
@@ -133,9 +133,9 @@ $(function () {
             toolbarSave: false
         },
         columns: [                
-            { field: 'recid', caption: 'ID doc', size: '50px', sortable: true, resizable: true },
-            { field: 'nom_colis', caption: 'nom_colis', size: '50px', sortable: true, resizable: true },
-          { field: 'id_perso', caption: 'ID perso', size: '50px', sortable: true, resizable: true },
+            { field: 'recid', caption: 'ID doc', size: '30%', sortable: true, resizable: true },
+            { field: 'nom_colis', caption: 'nom_colis', size: '40%', sortable: true, resizable: true },
+          { field: 'id_perso', caption: 'ID perso', size: '30%', sortable: true, resizable: true },
            
         ],
         toolbar: {
@@ -148,17 +148,12 @@ $(function () {
                 }
             }
         },
-        records: tabdocuments
+        records: tabcolis
     });    
 });
 
 }
-/*
-function showChanged() {
-    console.log(w2ui['grid'].getChanges()); 
-    w2alert('Changed records are displayed in the console');
-}
-*/
+
 </script>
 <body>
 </html>
