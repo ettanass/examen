@@ -104,6 +104,7 @@ $(function () {
 var tabcolis = [];
 readallDocuments();
     //j'ai pas pu terminer, j'ai mis mis l'id 1 a la place de la valeur retournée par l'input
+    //le
 function readallDocuments(){
   data = {"table":"colis","id_perso":1};
   $.ajax({url :'r.php',
@@ -135,7 +136,7 @@ $(function () {
         columns: [                
             { field: 'recid', caption: 'ID doc', size: '30%', sortable: true, resizable: true },
             { field: 'nom_colis', caption: 'nom_colis', size: '40%', sortable: true, resizable: true },
-          { field: 'id_perso', caption: 'ID perso', size: '30%', sortable: true, resizable: true },
+          { field: 'id_perso', caption: 'possesseur du colis', size: '30%', sortable: true, resizable: true },
            
         ],
         toolbar: {
